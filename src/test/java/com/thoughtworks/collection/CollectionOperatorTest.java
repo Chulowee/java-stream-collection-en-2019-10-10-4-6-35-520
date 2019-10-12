@@ -12,7 +12,6 @@ public class CollectionOperatorTest {
     @Test
     public void should_return_list_by_Interval() {
         //Select all the numbers in a given interval
-
         int right = 5;
         int left = 1;
 
@@ -54,7 +53,7 @@ public class CollectionOperatorTest {
 
         CollectionOperator collectionOperator = new CollectionOperator();
 
-        assertThat(collectionOperator.popEvenElments(array)).isEqualTo(resultList);
+        assertThat(collectionOperator.popEvenElements(array)).isEqualTo(resultList);
     }
 
     @Test
@@ -64,21 +63,21 @@ public class CollectionOperatorTest {
 
         CollectionOperator collectionOperator = new CollectionOperator();
 
-        assertThat(collectionOperator.popLastElment(array)).isEqualTo(5);
+        assertThat(collectionOperator.popLastElement(array)).isEqualTo(5);
     }
-//
-//    @Test
-//    public void should_pop_common_elements() {
-//        //Pops up the intersection of two arrays
-//        int[] firstArray = new int[]{1, 2, 4, 6, 10};
-//        int[] secondArray = new int[]{3, 2, 6, 10, 8};
-//
-//        Integer[] result = new Integer[]{2, 6, 10};
-//        List<Integer> resultList = Arrays.asList(result);
-//
-//        CollectionOperator collectionOperator = new CollectionOperator();
-//        assertThat(collectionOperator.popCommonElement(firstArray, secondArray)).isEqualTo(resultList);
-//    }
+
+    @Test
+    public void should_pop_common_elements() {
+        //Pops up the intersection of two arrays
+        int[] firstArray = new int[]{1, 2, 4, 6, 10};
+        int[] secondArray = new int[]{3, 2, 6, 10, 8};
+
+        Integer[] result = new Integer[]{2, 6, 10};
+        List<Integer> resultList = Arrays.asList(result);
+
+        CollectionOperator collectionOperator = new CollectionOperator();
+        assertThat(collectionOperator.popCommonElement(firstArray, secondArray)).isEqualTo(resultList);
+    }
 
     @Test
     public void should_add_uncommon_elements_to_first_array() {
