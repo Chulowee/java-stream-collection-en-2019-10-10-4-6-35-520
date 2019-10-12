@@ -1,6 +1,5 @@
 package com.thoughtworks.collection;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +27,7 @@ public class Reduce {
 
     public double getAverage() {
        return arrayList.stream()
-               .reduce((n,v)->n+v)
+               .reduce(Integer::sum)
                .map(Integer::doubleValue)
                .map(number -> number/arrayList.size())
                .get();
@@ -57,37 +56,51 @@ public class Reduce {
                 .get();
     }
 
-//    public int getIndexOfFirstEven() {
-//        return arrayList.stream()
-//                .filter(number -> number%2==0)
-//                .findFirst()
-//                .map()
-//                .get().;
-//    }
-
-    public boolean isEqual(List<Integer> arrayList) {
-        throw new NotImplementedException();
+    public int getIndexOfFirstEven() {
+        return arrayList.indexOf(
+                arrayList.stream()
+                        .filter(number -> number%2==0)
+                        .reduce((a,b) -> a)
+                        .get());
     }
 
-//    public Double getMedianInLinkList(SingleLink singleLink) {
-//        return arrayList.stream()
-//                .map(number -> {
-//                    if (arrayList.size()%2==0){
-//                        return arrayList.get((arrayList.size()+1)/2) +
-//                                arrayList.get((arrayList.size()+2)/2);
-//                    }
-////                    return number;
-//                })
-//                .reduce((n,b)-> n/2)
-//                .get()
-//                .doubleValue();
-//    }
+    public boolean isEqual(List<Integer> arrList) {
+        int sumOfIntList = arrList.stream()
+                .reduce(Integer::sum)
+                .orElse(0);
+        int sumOfArrayList = arrayList.stream()
+                .reduce(Integer::sum)
+                .orElse(0);
+        return sumOfArrayList == sumOfIntList;
+    }
+
+    public Double getMedianInLinkList(SingleLink singleLink) {
+        return arrayList.stream()
+                .mapToDouble(Integer::doubleValue)
+                .map(number -> {
+                    if (arrayList.size()%2==0){
+                        return (Double.valueOf(arrayList.get((arrayList.size()+1)/2) +
+                                arrayList.get((arrayList.size()-1)/2))/2);
+                    }else {
+                        return Double.valueOf(arrayList.get(arrayList.size()/2));
+                    }
+                })
+                .reduce((a,b) -> b)
+                .getAsDouble();
+    }
 
     public int getLastOdd() {
-        throw new NotImplementedException();
+        return arrayList.stream()
+                .filter(number -> number%2!=0)
+                .reduce((n,v) -> v)
+                .get();
     }
 
     public int getIndexOfLastOdd() {
-        throw new NotImplementedException();
+        return arrayList.indexOf(
+                arrayList.stream()
+                .filter(number -> number%2!=0)
+                .reduce((n,v) -> v)
+                .get());
     }
 }
