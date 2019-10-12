@@ -1,6 +1,5 @@
 package com.thoughtworks.collection;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class MyMap {
 
+    private static final int ALPHABET_COUNT = 26;
     List<Integer> array;
     private String[] letters = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
             "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
@@ -31,7 +31,17 @@ public class MyMap {
     }
 
     public List<String> mapLetters() {
-        throw new NotImplementedException();
+        return array.stream()
+                .map(this::getMappedLetter)
+                .collect(Collectors.toList());
+    }
+    private String getMappedLetter(int index) {
+        int trueIndex = --index;
+        if (++index > ALPHABET_COUNT) {
+            return letterList.get((trueIndex / ALPHABET_COUNT) - 1) +
+                    letterList.get(trueIndex % ALPHABET_COUNT);
+        }
+        return letterList.get(trueIndex);
     }
 
     public List<Integer> sortFromBig() {
