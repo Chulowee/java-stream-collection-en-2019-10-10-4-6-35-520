@@ -21,6 +21,15 @@ public class AddTest {
     }
 
     @Test
+    public void should_get_sum_of_odds() {
+        int leftBorder = 1;
+        int rightBorder = 10;
+        Add add = new Add();
+        assertThat(add.getSumOfOdds(leftBorder, rightBorder)).isEqualTo(25);
+        assertThat(add.getSumOfOdds(rightBorder, leftBorder)).isEqualTo(25);
+    }
+
+    @Test
     public void should_get_triple_and_add_two() {
         Integer[] array = new Integer[]{1, 5, 7, 11, 35, 67};
         List<Integer> arrayList = Arrays.asList(array);
@@ -32,7 +41,6 @@ public class AddTest {
 
     @Test
     public void should_get_triple_of_odd_and_add_two() {
-        //For odd number (n*3 + 2)
         Integer[] array = new Integer[]{1, 5, 7, 12, 11, 35, 54, 67, 70};
         List<Integer> arrayList = Arrays.asList(array);
 
